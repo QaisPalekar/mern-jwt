@@ -1,5 +1,5 @@
 
-const remoteUrl = "http://localhost:8081";
+const remoteUrl = "http://localhost:8082";
 
 const  post = async (url, body) => {
     try {
@@ -19,7 +19,7 @@ const  post = async (url, body) => {
             throw result;
         }
     } catch (error) {
-        console.log(error)
+        throw error;
     }
 }
 

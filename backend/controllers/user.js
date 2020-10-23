@@ -12,3 +12,5 @@ router.post('/user/list', function(req, res) {
 router.post('/user/details', auth.autherticationMiddleware, function(req, res) {
     res.json({user: {}})
 });
+
+module.exports = router;

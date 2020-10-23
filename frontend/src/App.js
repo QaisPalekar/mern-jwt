@@ -6,8 +6,8 @@ import {
   Route,
 } from "react-router-dom";
 import PrivateRoute from './components/PrivateRoute';
-import Login from './containers/login';
-import SignIn from './containers/signIn';
+import SingIn from './containers/signIn';
+import SignUp from './containers/signUp';
 import Header from './components/Header';
 import Home from './containers/home';
 
@@ -17,10 +17,10 @@ function App() {
         <Header />
         <Switch>
           <Route path="/login">
-            <Login />
+            <SingIn />
           </Route>
           <Route path="/register">
-            <SignIn />
+            <SignUp />
           </Route>
           <PrivateRoute path="/">
             <Home />

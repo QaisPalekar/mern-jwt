@@ -9,8 +9,9 @@ const User = new mongoose.Schema({
         type: String,
         required: true
     },
-    lastname: {
-        type: String
+    lastName: {
+        type: String,
+        required: true
     },
     email: {
         type: String,
@@ -23,7 +24,7 @@ const User = new mongoose.Schema({
     }
 });
 
-User.plugin(uniqueValidator, { message: 'Error, ++ expected {PATH} to be unique.' });
+User.plugin(uniqueValidator, { message: 'Error, expected {PATH} to be unique.' });
 
 User.pre("save", function (next) {
     const user = this;

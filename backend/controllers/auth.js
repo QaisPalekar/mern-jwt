@@ -12,18 +12,25 @@ router.post('/signin', async function(req, res) {
     if(!email || !password) {
         res.status(500).json({message: 'Provide and email and password'});
     }
-    const user = await UserModel.findOne({ email }).exec()
-    user.comparePassword(password, function(err, isMatch) {
-        if(err) {
-            console.log(err)
-        }
-        if(isMatch) {
-            const token = generateToken({ email })
-            res.json({token});
-        } else {
-            res.status(500).json({ message: 'Incorrect password' });
-        } 
-    });
+
+    const user = await UserModel.findOne({ email }).exec();
+
+    if(user) {
+        user.comparePassword(password, function(err, isMatch) {
+            if(err) {
+                console.log(err)
+            }
+            if(isMatch) {
+                const token = generateToken({ email })
+                res.json({token});
+            } else {
+                res.status(500).json({ message: 'Incorrect password' });
+            } 
+        });
+    } else {
+        res.status(500).json({ message: 'No user found' });
+    }
+
 });
 
 router.post('/signup', async function(req, res) {
@@ -32,7 +39,7 @@ router.post('/signup', async function(req, res) {
         const token = generateToken({email: user.email})
         res.json({token});
     } catch (error) {
-        res.status(500).json(error);
+        res.status(500).json({message: "Something Went wrong", error});
     }
     
 });
